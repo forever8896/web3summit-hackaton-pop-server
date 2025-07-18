@@ -17,11 +17,8 @@ RUN curl https://sh.rustup.rs -sSf | bash -s -- -y \
     && /root/.cargo/bin/rustup component add rust-src
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-# Install cargo-contract with explicit path
-RUN /root/.cargo/bin/cargo install --locked cargo-contract --version 4.1.1
-
-# Install Pop CLI with proper cargo command
-RUN /root/.cargo/bin/cargo install --force --locked pop-cli
+# Install Pop CLI with ink! v6 support (polkavm-contracts feature)
+RUN /root/.cargo/bin/cargo install pop-cli --no-default-features --locked -F polkavm-contracts,parachain,telemetry
 
 # Set working directory
 WORKDIR /app
@@ -49,6 +46,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 RUN which node && which npm && which cargo && which pop \
     && node --version && npm --version \
     && /root/.cargo/bin/cargo --version \
-    && /root/.cargo/bin/pop --version
+    && /root/.cargo/bin/pop --version \
+    && echo "POP CLI installed with ink! v6 support (polkavm-contracts feature)"
 
 CMD ["node", "server.js"]
