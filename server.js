@@ -425,8 +425,7 @@ app.get("/compile-job/:jobId/logs", (req, res) => {
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
-      'Connection': 'keep-alive',
-      'Access-Control-Allow-Origin': '*'
+      'Connection': 'keep-alive'
     });
     
     // Send existing logs
@@ -633,9 +632,7 @@ app.post("/compile-stream", async (req, res) => {
   res.writeHead(200, {
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache',
-    'Connection': 'keep-alive',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Cache-Control'
+    'Connection': 'keep-alive'
   });
 
   const sendEvent = (type, data) => {
@@ -899,9 +896,7 @@ app.post("/warm-cache-stream", async (req, res) => {
   res.writeHead(200, {
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache',
-    'Connection': 'keep-alive',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Cache-Control'
+    'Connection': 'keep-alive'
   });
 
   const sendEvent = (type, data) => {
